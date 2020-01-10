@@ -1,0 +1,30 @@
+<br>
+<mat-form-field>
+Name:
+  <input matInput [readonly]="false" [(ngModel)]="customer.name"   >
+</mat-form-field>
+
+<mat-form-field>
+  Email:
+  <input matInput [type]="number" [(ngModel)]="customer.email" />
+</mat-form-field>
+ 
+<mat-form-field>
+  Tel:
+  <input matInput  [(ngModel)]="customer.tel"  />
+</mat-form-field>
+
+<mat-form-field>
+  CPF:
+  <input matInput  [(ngModel)]="customer.tel" />
+</mat-form-field> 
+
+  <div>
+  <button mat-raised-button color="primary"
+  (click)="save()" >
+  Save
+  </button>
+  <button mat-raised-button color="primary"
+  (click)="goBack()">
+  Return
+  </button>
