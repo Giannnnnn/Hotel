@@ -1,36 +1,27 @@
-    
-  <mat-card class="example-card">
-    <mat-card-header>
-      <div mat-card-avatar  class="example-header-image"></div>
-      <mat-card-title>Classic Room</mat-card-title>
-      <mat-card-subtitle>A confortable option for your travel</mat-card-subtitle>
-    </mat-card-header>
-    <img mat-card-image src="https://media-cdn.tripadvisor.com/media/photo-s/01/c6/fb/2d/classic-hotel-london.jpg" alt="Classic Room">
-    <mat-card-content>
-      <p>
-        blalbalblalbalblalblbal classic room
-      </p>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-button  routerLink="/rooms/classic/renting">New Rent</button>
-      <button mat-button routerLink="/rooms/classic">Details</button>
-    </mat-card-actions>
-  </mat-card>
-  
-  <mat-card class="example-card">
-    <mat-card-header>
-      <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title>Deluxe Room</mat-card-title>
-    <mat-card-subtitle>The most luxuous option for your rest</mat-card-subtitle>
-  </mat-card-header>
-  <img mat-card-image src="https://content.r9cdn.net/rimg/himg/1b/db/07/hotelsdotcom-417660-8d657c4c_w-069094.jpg?width=568&height=350&crop=true&caller=HotelDetailsPhoto" alt="Classic Room">
-  <mat-card-content>
-    <p>
-      blalbalblalbalblalblbal deluxe room
-    </p>
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-button  routerLink="/rooms/deluxe/renting">New Rent</button>
-    <button mat-button routerLink="/rooms/deluxe" >Details</button>
-  </mat-card-actions>
-</mat-card>
+<div class="example-container mat-elevation-z8">
+  <mat-table #table [dataSource]="dataSource">
+
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Number </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="type">
+      <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.type}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.status}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>

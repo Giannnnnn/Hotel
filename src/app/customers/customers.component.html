@@ -9,7 +9,7 @@
   
   <ng-container matColumnDef="name">
     <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-    <mat-cell *matCellDef="let element"> <a routerLink="/detail/{{element.id}}">{{element.name}} </a></mat-cell>
+    <mat-cell *matCellDef="let element"> <a routerLink="/detail/{{element.id}}" style="text-decoration: none;">{{element.name}} </a></mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="email" >
@@ -26,38 +26,19 @@
     <mat-header-cell *matHeaderCellDef> CPF </mat-header-cell>
     <mat-cell *matCellDef="let element"> {{element.cpf}} </mat-cell>
   </ng-container>
+
+
+  <ng-container matColumnDef="status">
+    <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.status}} </mat-cell>
+  </ng-container>
   
+
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
   <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 </mat-table>
-</div>
-
-<div>
-  <mat-form-field >
-    <input matInput placeholder="Name" [(ngModel)]="name" [formControl]="nameForm">
-  </mat-form-field>
-
-  <mat-form-field >
-    <input matInput placeholder="Email" [(ngModel)]="email"[formControl]="emailForm">
-  </mat-form-field>
-  
-  <mat-form-field >
-    <input matInput placeholder="Tel." [(ngModel)]="tel"[formControl]="telForm">
-  </mat-form-field>
-  
-  <mat-form-field >
-    <input matInput placeholder="CPF" [(ngModel)]="cpf"[formControl]="cPFForm">
-  </mat-form-field>
-
-
-
-
-  <button mat-raised-button color="primary"
-  (click)="add()">
-  Add
+<button mat-raised-button color="accent"
+(click)="goBack()">
+Return
 </button>
-
-
-
-
 </div>

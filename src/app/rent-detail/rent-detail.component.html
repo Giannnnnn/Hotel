@@ -1,0 +1,43 @@
+<mat-form-field>
+  Id:
+    <input matInput [(ngModel)]="rent.id"   >
+  </mat-form-field>
+<mat-form-field>
+  Name:
+    <input matInput [(ngModel)]="rent.name"   >
+  </mat-form-field>
+  <mat-form-field>
+  CheckIn:
+    <input matInput [(ngModel)]="rent.check_in" />
+  </mat-form-field>
+   
+  <mat-form-field>
+    CheckOut:
+    <input matInput  [(ngModel)]="rent.check_out"  />
+  </mat-form-field>
+  
+  <mat-form-field>
+    Room type:
+    <input matInput  [(ngModel)]="rent.room_type" />
+  </mat-form-field> 
+  
+  <mat-form-field>
+    Total: R$
+    <input matInput  [(ngModel)]="rent.value" />
+  </mat-form-field> 
+  
+  
+    <div>
+    <button mat-raised-button color="accent"
+    (click)="save()" >
+    Save
+    </button>
+    <button mat-raised-button color="accent"
+  (click)="delete()">
+  Delete
+  </button>
+    <button mat-raised-button color="accent"
+    (click)="goBack()">
+    Return
+    </button>
+  

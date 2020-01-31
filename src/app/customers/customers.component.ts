@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Customer } from '../customer'; 
-import { FormsModule, FormControl, Validators } from '@angular/forms'; 
-import {CUSTOMERS} from '../mock-customers';
+import { FormControl } from '@angular/forms'; 
 import{ CustomerService} from '../customer.service';
-import { debugOutputAstAsTypeScript } from '@angular/compiler';
 import * as _ from 'lodash';
 import { CustomerDetailComponent } from '../customer-detail/customer-detail.component';
 
@@ -13,25 +11,28 @@ import { CustomerDetailComponent } from '../customer-detail/customer-detail.comp
   styleUrls: ['./customers.component.css']
 })
 
-//after exporting the class, these methods inside, will be able to be called anywhere
+
 export class CustomersComponent implements OnInit {
+  [x: string]: any;
+
   
   selectedCustomer: Customer; 
   customers: Customer[];
+  
+  displayedColumns: string[] = ['id', 'name', 'email','tel','cpf','status'];
 
-  displayedColumns: string[] = ['id', 'name', 'email','tel','cpf'];
-
+  
   name: string="";
   email:  string ="";
   tel: string ="";
   cpf:string="";
-
+  status :'ok' | 'overdue' = 'ok';
 
   nameForm: FormControl;
   emailForm:FormControl;
   telForm:FormControl;
   cPFForm:FormControl;
-
+  statusForm:FormControl;
 
   constructor(private customerService: CustomerService) { }
 
@@ -41,7 +42,7 @@ export class CustomersComponent implements OnInit {
     this.emailForm = new FormControl(this.email);
     this.telForm = new FormControl(this.tel);
     this.cPFForm = new FormControl(this.cpf);
-
+    this.statusForm = new FormControl(this.status);
   }
 
   getCustomers():void{
@@ -51,19 +52,16 @@ export class CustomersComponent implements OnInit {
 
   add():void{
     
-    let customer = new Customer(6, this.name, this.email,this.tel,this.cpf); 
+    let customer = new Customer(6, this.name, this.email,this.tel,this.cpf,this.status); 
    
     this.customerService.addCustomer(customer)
     .subscribe(customer=>{
-
       this.customers = this.customers.concat([customer]);
-
     });
 
-    // CustomerDetailComponent():void{
-    // routerLink="/detail/{{customer.id}};}
-
-
   }
+  goBack(): void {
+    this.location.back();
+}
   
 }

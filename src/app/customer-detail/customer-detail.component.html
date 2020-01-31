@@ -1,12 +1,11 @@
 <br>
 <mat-form-field>
 Name:
-  <input matInput [readonly]="false" [(ngModel)]="customer.name"   >
+  <input matInput [(ngModel)]="customer.name"   >
 </mat-form-field>
-
 <mat-form-field>
   Email:
-  <input matInput [type]="number" [(ngModel)]="customer.email" />
+  <input matInput [(ngModel)]="customer.email" />
 </mat-form-field>
  
 <mat-form-field>
@@ -16,15 +15,24 @@ Name:
 
 <mat-form-field>
   CPF:
-  <input matInput  [(ngModel)]="customer.tel" />
+  <input matInput  [(ngModel)]="customer.cpf" />
+</mat-form-field> 
+<mat-form-field>
+  Status:
+  <input matInput  [(ngModel)]="customer.status" />
 </mat-form-field> 
 
+
   <div>
-  <button mat-raised-button color="primary"
+  <button mat-raised-button color="accent"
   (click)="save()" >
   Save
   </button>
-  <button mat-raised-button color="primary"
+  <button mat-raised-button color="accent"
+(click)="delete()">
+Delete
+</button>
+  <button mat-raised-button color="accent"
   (click)="goBack()">
   Return
-  </button>
+</button>

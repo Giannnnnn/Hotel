@@ -1,0 +1,21 @@
+<form class="customer-search">
+  <mat-form-field>
+    <input matInput
+           placeholder="customer"
+           [matAutocomplete]="auto"
+           [formControl]="customerCtrl">
+
+    <mat-autocomplete #auto="matAutocomplete"
+                      [displayWith]="displayFn"
+                      (optionSelected)="customerSelected($event)">
+
+      <mat-option *ngFor="let customer of filteredCustomers"
+                  [value]="customer.id">
+
+        <span>
+          {{ customer.name }} </span> |
+        <small>Id: {{customer.id}}</small>
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</form>

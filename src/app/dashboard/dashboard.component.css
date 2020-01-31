@@ -1,0 +1,15 @@
+h1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo div{
+    background-color: rgb(241, 243, 138);
+    width: 4em;
+    height: 4em;
+}
+
+.toolbarBelow{
+    background-color: rgb(255, 238, 163);
+}

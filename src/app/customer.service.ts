@@ -2,15 +2,12 @@ import { Injectable } from '@angular/core';
 import{Observable} from 'rxjs/Observable';
 import {of} from 'rxjs/observable/of';
 import {Customer} from './customer';
-import{CUSTOMERS} from './mock-customers';
 import{HttpClient,HttpHeaders} from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 
 
 @Injectable()
 export class CustomerService {
-
-  
 
   private customersUrl = 'api/customers';
 
@@ -23,14 +20,16 @@ export class CustomerService {
     );
   }
 
+
   getCustomer(id: number):Observable<Customer>{
     const url= `${this.customersUrl}/${id}`;
+
     return this.http.get<Customer>(url).pipe(
       catchError(this.handleError<Customer>(`getHero id=${id}`))
     );
+
   }
 
-  
 private handleError<T> (operation = 'operation', result?: T) {
   return (error: any): Observable<T> => {
 
@@ -59,6 +58,28 @@ addCustomer(customer: Customer):Observable<Customer>{
   .pipe(
     catchError(this.handleError<Customer>('addCustomer'))
 );
-} 
+}
+
+
+deleteCustomer(customer:Customer | number):Observable<Customer>{
+  const httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })};
+
+const id = typeof customer === 'number' ? customer : customer.id;
+const url = `${this.customersUrl}/${id}`;
+
+return this.http.delete<Customer>(url,httpOptions).pipe(
+  catchError(this.handleError<Customer>('deleteCustomer'))
+)
+}
+
+searchCustomers(term:string):Observable<Customer[]>{
+  if(!term.trim()){
+    return of ([]);
+  }
+  return this.http.get<Customer[]>(`api/customers/name=${term}`).pipe(
+    catchError(this.handleError<Customer[]>('searchCustomer',[]))
+  );
+}
 
 }

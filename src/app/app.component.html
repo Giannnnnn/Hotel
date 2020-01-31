@@ -1,17 +1,30 @@
-<nav>
+<mat-toolbar color="accent">
+  <mat-toolbar-row>
+    <button mat-icon-button (click)="sidenav.toggle()" class="material-icons">menu</button>
+    <h1>Royal Hotel</h1>
+    <span class="menu-spacer"></span>
+    <div >
+      <a mat-button [routerLink]="'/dashboard'" >Dashboard </a>
+      <a mat-button [routerLink]="'/customers/list'" >Customers </a>
+      <a mat-button [routerLink]="'/rent/list'" >Rentings</a>
+      <a mat-button [routerLink]="'/rooms'" >Rooms</a>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
 
-  <button mat-button routerLink="/dashboard" color="primary">
-    Dashboard
-  </button>
-  <button mat-button routerLink="/customers" color="primary">
-    Customer List
-  </button>
-  <button mat-button  routerLink="/rooms" color="primary">
-    Rooms
-  </button>
-</nav> 
-<router-outlet></router-outlet> 
-
-
-
-
+<mat-sidenav-container>
+  <mat-sidenav #sidenav>
+    <mat-nav-list>
+        <a mat-list-item  [routerLink]="'/renting'" (click)="sidenav.toggle()">New Renting</a>
+        <a mat-list-item [routerLink]="'/customer/add'" (click)="sidenav.toggle()"> Add Customer </a>
+        <a mat-list-item [routerLink]="'/room/add'" (click)="sidenav.toggle()"> Add Room </a>
+        <a mat-list-item (click)="sidenav.toggle()" mat-list-item>Close</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  
+  <mat-sidenav-content>
+    <div style="height: 88vh;">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,23 +1,33 @@
 import { Component, OnInit } from '@angular/core';
-import { CustomerService} from '../customer.service';
+import { CustomerService } from '../customer.service';
 import { Customer } from '../customer';
+import { FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+    selector: 'app-dashboard',
+    templateUrl: './dashboard.component.html',
+    styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  customers: Customer[] = [];
+    customers: Customer[] = [];
 
-  constructor(private customerService: CustomerService) { }
+    public customerControl: FormControl ;
 
-  ngOnInit() {
-    this.getCustomers();
-  }
+    constructor(private customerService: CustomerService,
+        private router: Router) { }
 
-  getCustomers():void{
-    this.customerService.getCustomers()
-    .subscribe(customers => this.customers = customers.slice(1,5));
-  }
+    ngOnInit() {
+        this.customerControl = new FormControl();
+        this.getCustomers();
+    }
+
+    getCustomers(): void {
+        this.customerService.getCustomers()
+            .subscribe(customers => this.customers = customers.slice(1, 5));
+
+        this.customerControl.valueChanges.subscribe(value => {
+            this.router.navigate(['detail', value.id]);
+        });
+    }
 }

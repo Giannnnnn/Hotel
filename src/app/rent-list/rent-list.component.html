@@ -1,3 +1,35 @@
-<p>
-  rent-list works!
-</p>
+<div class="example-container mat-elevation-z8">
+  <mat-table #table [dataSource]="dataSource">
+
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="check_In">
+      <mat-header-cell *matHeaderCellDef> CheckIn </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.check_In}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="check_Out">
+      <mat-header-cell *matHeaderCellDef> CheckOut </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.check_Out}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="roomType">
+      <mat-header-cell *matHeaderCellDef> Room Type </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.roomType}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="value">
+      <mat-header-cell *matHeaderCellDef> Total $: </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.value}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>
