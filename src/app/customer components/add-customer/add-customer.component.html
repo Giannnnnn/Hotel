@@ -1,0 +1,37 @@
+<div>
+  <mat-form-field >
+    <input matInput placeholder="Name" [formControl]="nameFormControl" [(ngModel)]="name" >
+  </mat-form-field>
+
+  <mat-form-field >
+    <input matInput placeholder="Email" [formControl]="emailFormControl" [(ngModel)]="email">
+    <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+      Please enter a valid email address
+    </mat-error>
+  </mat-form-field>
+  
+  <mat-form-field >
+    <span matPrefix>+55 &nbsp;</span>
+    <input matInput placeholder="Tel."  [formControl]="telFormControl" [(ngModel)]="tel">
+    <mat-error *ngIf="telFormControl.hasError('tel') && !telFormControl.hasError('required')">
+      Please enter a valid phone number
+    </mat-error>
+  </mat-form-field>
+  
+  <mat-form-field >
+    <input matInput placeholder="CPF" [formControl]="cpfFormControl" [(ngModel)]="cpf">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Status</mat-label>
+  <mat-select #customerStatus [(formControl)]="statusForm" [(ngModel)]="status" >
+    <mat-option value="ok">Ok</mat-option>
+    <mat-option value="overdue">Overdue</mat-option>
+  </mat-select>
+  </mat-form-field>
+
+  <button mat-raised-button color="accent"
+  (click)="add()">
+  Add
+</button>
+</div>

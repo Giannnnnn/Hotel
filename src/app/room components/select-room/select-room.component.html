@@ -1,0 +1,40 @@
+<div class="example-container mat-elevation-z8">
+  <mat-table #table [dataSource]="rooms">
+
+    <ng-container matColumnDef="select">
+      <mat-header-cell *matHeaderCellDef>
+        <mat-checkbox (change)="masterToggle($event)"
+                      [checked]="selection.hasValue() && isSelected()"
+                      [indeterminate]="selection.hasValue() && !isSelected()">
+        </mat-checkbox>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <mat-checkbox (click)="masterToggle($event, row) "
+                      (change)="$event ? selection.toggle(row) : null"
+                      [checked]="selection.isSelected(row)">
+        </mat-checkbox>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Number </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="roomType">
+      <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.roomType}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="roomStatus">
+      <mat-header-cell *matHeaderCellDef > Status </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.roomStatus}} </mat-cell>
+    </ng-container>
+
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"
+             (click)="selection.toggle(row)">
+    </mat-row>
+  </mat-table>
+</div>

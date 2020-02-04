@@ -1,4 +1,4 @@
-import { Customer} from './customer';
+import { Customer} from './models/customer';
 
 
 //later we're going to import from a dataserver that we're going to create,

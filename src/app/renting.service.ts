@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import{Observable} from 'rxjs/Observable';
 import {of} from 'rxjs/observable/of';
-import {Rent} from './rent';
+import {Rent} from './models/rent';
 import{HttpClient,HttpHeaders} from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 
@@ -9,7 +9,7 @@ import { catchError } from 'rxjs/operators';
 @Injectable()
 export class RentingService {
 
-  private rentURL = 'api/rent/list';
+  private rentURL = 'http://localhost:5000/api/renting';
   constructor(private http: HttpClient) { }
 
   getRentings(): Observable<Rent[]>{
@@ -48,7 +48,7 @@ addRent(rent: Rent):Observable<Rent>{
 
   const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })};
-  return this.http.post<Rent>(this.rentURL, rent, httpOptions)
+  return this.http.post<Rent>(this.rentURL,rent, httpOptions)
   .pipe(
     catchError(this.handleError<Rent>('addRent'))
 );
@@ -59,7 +59,7 @@ deleteRent(rent:Rent | number):Observable<Rent>{
   const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })};
 
-const id = typeof rent === 'number' ? rent : rent.idRenting;
+const id = typeof rent === 'number' ? rent : rent.customerID;
 const url = `${this.rentURL}/${id}`;
 
 return this.http.delete<Rent>(url,httpOptions).pipe(

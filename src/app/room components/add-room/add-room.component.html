@@ -1,0 +1,19 @@
+<div>
+  <mat-form-field >
+    <input matInput placeholder="Name" [formControl]="nameFormControl" [(ngModel)]="name"  >
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Type</mat-label>
+  <mat-select #roomStatus [formControl]="roomFormControl" [(ngModel)]="roomType">
+    <mat-option value="classic">Classic</mat-option>
+    <mat-option value="deluxe">Deluxe</mat-option>
+  </mat-select>
+  </mat-form-field>
+
+
+  <button mat-raised-button 
+  (click)="add()" color="accent">
+  Add
+</button>
+</div>

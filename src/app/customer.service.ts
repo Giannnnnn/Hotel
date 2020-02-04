@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import{Observable} from 'rxjs/Observable';
 import {of} from 'rxjs/observable/of';
-import {Customer} from './customer';
+import {Customer} from './models/customer';
 import{HttpClient,HttpHeaders} from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 
@@ -9,7 +9,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 @Injectable()
 export class CustomerService {
 
-  private customersUrl = 'api/customers';
+  private customersUrl = 'http://localhost:5000/api/customer';
 
   constructor(private http: HttpClient) { }
 
@@ -24,22 +24,17 @@ export class CustomerService {
   getCustomer(id: number):Observable<Customer>{
     const url= `${this.customersUrl}/${id}`;
 
-    return this.http.get<Customer>(url).pipe(
-      catchError(this.handleError<Customer>(`getHero id=${id}`))
-    );
-
+    return this.http.get<Customer>(url);
   }
 
 private handleError<T> (operation = 'operation', result?: T) {
+  
   return (error: any): Observable<T> => {
-
-    // TODO: send the error to remote logging infrastructure
-    console.error(error); // log to console instead
-
-    // Let the app keep running by returning an empty result.
+    console.error(error);
     return of(result as T);
   };
 }
+
 
 updateCustomer(customer:Customer):Observable<any>{
 
@@ -50,15 +45,14 @@ updateCustomer(customer:Customer):Observable<any>{
   .pipe(catchError(this.handleError<any>('updateCustomer')))
 }
 
-addCustomer(customer: Customer):Observable<Customer>{
 
+addCustomer(customer: Customer):Observable<string>{
   const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })};
-  return this.http.post<Customer>(this.customersUrl, customer, httpOptions)
-  .pipe(
-    catchError(this.handleError<Customer>('addCustomer'))
-);
+  return this.http.post<string>(this.customersUrl, customer);
+
 }
+
 
 
 deleteCustomer(customer:Customer | number):Observable<Customer>{

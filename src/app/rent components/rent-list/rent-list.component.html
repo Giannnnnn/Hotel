@@ -1,0 +1,35 @@
+<div class="example-container mat-elevation-z8">
+  <mat-table #table [dataSource]="rentings">
+
+    <ng-container matColumnDef="idCustomer">
+      <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.idCustomer}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="roomType">
+      <mat-header-cell *matHeaderCellDef> Roomtype </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.roomType}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="dateCheckinRent">
+      <mat-header-cell *matHeaderCellDef> CheckIn </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.dateCheckinRent}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="dateCheckoutRent">
+      <mat-header-cell *matHeaderCellDef> CheckOut </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.dateCheckoutRent}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="totalDays">
+      <mat-header-cell *matHeaderCellDef> DaysStaying</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.totalDays}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="finalValue">
+      <mat-header-cell *matHeaderCellDef> Total $: </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.finalValue}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>

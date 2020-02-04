@@ -1,0 +1,91 @@
+<mat-horizontal-stepper [linear]="true"
+                        #stepper="matHorizontalStepper"
+                        (selectionChange)="stepHasChanged($event)">
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Fill out the name</ng-template>
+      <app-customer-search class="customer-selection"
+                           (customerChange)="valueChanged($event)"
+                           [(control)]="firstFormGroup.controls.customerCtrl">
+      </app-customer-search>
+
+      <div>
+        <button mat-button
+                matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+
+
+  <mat-step [stepControl]="secondFormGroup">
+    <ng-template matStepLabel>select the Room</ng-template>
+    <app-select-room  (room)="rent.idRoom = $event.id"></app-select-room>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+  </mat-step>
+
+  <mat-step [stepControl]="thirdFormGroup">
+    <ng-template matStepLabel>Check In</ng-template>
+
+    <div fxFlex="column">
+      <mat-form-field>
+        <input matInput
+               [matDatepicker]="checkInDatePicker"
+               placeholder="Choose a date to checkIn"
+               [(formControl)]="thirdFormGroup.controls.checkInCtrl">
+
+        <mat-datepicker-toggle matSuffix
+                               [for]="checkInDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #checkInDatePicker></mat-datepicker>
+      </mat-form-field>
+
+      <div>
+         <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </div>
+  </mat-step>
+
+  <mat-step [stepControl]="fourthFormGroup">
+    <ng-template matStepLabel>Check Out</ng-template>
+    <div fxFlex="column">
+      <mat-form-field>
+        <input matInput
+               [matDatepicker]="checkOutDatePicker"
+               placeholder="Choose a date to checkOut"
+               [(formControl)]="fourthFormGroup.controls.checkOutCtrl">
+
+        <mat-datepicker-toggle matSuffix
+                               [for]="checkOutDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #checkOutDatePicker></mat-datepicker>
+      </mat-form-field>
+
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+
+    </div>
+  </mat-step>
+
+
+  <mat-step [stepControl]="fifthFormGroup">
+    <ng-template matStepLabel>Finish</ng-template>
+
+    Total Value:
+    <mat-divider></mat-divider>
+    <h2>{{totalDays}} days - total value: R$ {{calculatedValue}}.00</h2>
+
+    Room type:
+    <mat-divider></mat-divider>
+    <h3>
+      {{roomType}} room
+    </h3>
+
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="save()">Save</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import{Observable} from 'rxjs/Observable';
 import {of} from 'rxjs/observable/of';
-import {Room} from './room';
+import {Room} from './models/room';
 import{HttpClient,HttpHeaders} from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 
@@ -9,14 +9,14 @@ import { catchError, map, tap } from 'rxjs/operators';
 @Injectable()
 export class RoomService {
 
-  private roomURL = 'api/rooms';
+  private roomURL = 'http://localhost:5000/api/room';
 
   constructor(private http: HttpClient) { }
 
-  getCustomers(): Observable<Room[]>{
+  getRooms(): Observable<Room[]>{
     return this.http.get<Room[]>(this.roomURL)
     .pipe(
-      catchError(this.handleError('getCustomers',[]))
+      catchError(this.handleError('getRooms',[]))
     );
   }
 
@@ -36,7 +36,7 @@ private handleError<T> (operation = 'operation', result?: T) {
   };
 }
 
-updateCustomer(customer:Room):Observable<any>{
+updateRoom(customer:Room):Observable<any>{
 
   const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })};
@@ -45,18 +45,15 @@ updateCustomer(customer:Room):Observable<any>{
   .pipe(catchError(this.handleError<any>('updateRoom')))
 }
 
-addCustomer(room: Room):Observable<Room>{
+addRoom(room: Room):Observable<string>{
 
   const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })};
-  return this.http.post<Room>(this.roomURL, room, httpOptions)
-  .pipe(
-    catchError(this.handleError<Room>('addRoom'))
-);
+  return this.http.post<string>(this.roomURL, room);
 }
 
 
-deleteCustomer(room:Room | number):Observable<Room>{
+deleteRoom(room:Room | number):Observable<Room>{
   const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })};
 
@@ -68,7 +65,7 @@ return this.http.delete<Room>(url,httpOptions).pipe(
 )
 }
 
-searchCustomers(term:string):Observable<Room[]>{
+searchRooms(term:string):Observable<Room[]>{
   if(!term.trim()){
     return of ([]);
   }
